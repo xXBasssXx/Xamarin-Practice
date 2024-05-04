@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
@@ -16,16 +17,43 @@ namespace TestMobile.ViewModels
     {
         private readonly HttpClient _client = new HttpClient();
 
-        public List<Jokes> _jokesResult;
-        public List<Jokes> JokesResult
+        public ObservableCollection<Jokes> jokesResult;
+        public bool showTitle;
+        public bool isTwoPart;
+
+        public bool IsTwoPart
         {
             get
             {
-                return _jokesResult;
+                return isTwoPart;
             }
             set
             {
-                _jokesResult = value;
+                isTwoPart = value;
+                OnPropertChanged(nameof(IsTwoPart));
+            }
+        }
+        public bool ShowTitle
+        {
+            get
+            {
+                return showTitle;
+            }
+            set
+            {
+                showTitle = value;
+                OnPropertChanged(nameof(ShowTitle));
+            }
+        }
+        public ObservableCollection<Jokes> JokesResult
+        {
+            get
+            {
+                return jokesResult;
+            }
+            set
+            {
+                jokesResult = value;
                 OnPropertChanged(nameof(JokesResult));
             }
         }
@@ -66,7 +94,7 @@ namespace TestMobile.ViewModels
             //JokeContent = await JokeService.GetJoke(url);
             var jokeResult = new Joke();
             var test = JokeContent;
-            var url = $"{ApiUrlConstants.JokeUrl}?contains={JokeContent}&amount=5";
+            var url = $"{ApiUrlConstants.JokeUrl}?type=twopart&contains={JokeContent}&amount=5";
 
             var response = await _client.GetAsync(url);
 
@@ -77,7 +105,7 @@ namespace TestMobile.ViewModels
             var content = await response.Content.ReadAsStringAsync();
             jokeResult = JsonConvert.DeserializeObject<Joke>(content);
             JokesResult = jokeResult.jokes;
-
+            ShowTitle = true;
             return;
         }
     }

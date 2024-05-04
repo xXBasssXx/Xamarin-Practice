@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace TestMobile.Models
@@ -11,7 +12,7 @@ namespace TestMobile.Models
     {
         public bool error { get; set; }
         public int amount { get; set; }
-        public List<Jokes> jokes { get; set; }
+        public ObservableCollection<Jokes> jokes { get; set; }
     }
     public class Flags
     {
@@ -26,7 +27,8 @@ namespace TestMobile.Models
     {
         public string category { get; set; }
         public string type { get; set; }
-        public string joke { get; set; }
+        public string setup { get; set; }
+        public string delivery { get; set; }
         public Flags flags { get; set; }
         public int id { get; set; }
         public bool safe { get; set; }

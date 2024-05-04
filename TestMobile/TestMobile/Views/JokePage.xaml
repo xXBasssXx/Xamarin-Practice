@@ -63,6 +63,28 @@
                 FontFamily="monospace"
                 Command="{Binding JokeCommand}"
                 />
+
+            <Label 
+                IsVisible="{Binding ShowTitle}"
+                Grid.Row="3" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="3"
+                Margin="0, 30, 0, 0"
+                Text="Generated Jokes:"
+                TextDecorations="Underline"
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                VerticalOptions="Center"
+                FontSize="Medium"
+                FontFamily="monospace"/>
+
+            <ListView Grid.Row="4" Grid.ColumnSpan="3" ItemsSource="{Binding JokesResult}" ItemTapped="SelectedJoke">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Detail="{Binding setup}" DetailColor="Black"  />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
