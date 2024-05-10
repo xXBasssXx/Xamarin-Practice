@@ -25,7 +25,9 @@ namespace TestMobile.Views
         {
             var selectedJoke = (Jokes)e.Item;
 
-            await DisplayAlert("Punch Line", selectedJoke.delivery, "HAHA");
+            await DisplayAlert("Setup", selectedJoke.setup, "Okay?");
+
+            await DisplayAlert("Punch Line", selectedJoke.delivery, "HAHA!");
         }
 
     }
